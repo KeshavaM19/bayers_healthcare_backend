@@ -38,8 +38,6 @@ router.get('/profile', authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ Correct export: Export only the router
 module.exports = router;
 
-// ✅ (Optional) If you need `authMiddleware` in other files
 module.exports.authMiddleware = authMiddleware;
