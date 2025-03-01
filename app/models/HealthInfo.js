@@ -8,7 +8,7 @@ const healthInfoSchema = new Schema({
     isDeleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
-healthInfoSchema.index({ title: 1, userId: 1 }); // Index for faster queries
+healthInfoSchema.index({ title: 1 }); // Index for faster queries
 
 // Soft delete: exclude deleted records from find queries
 healthInfoSchema.pre(/^find/, function (next) {
