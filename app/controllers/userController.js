@@ -10,7 +10,6 @@ const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization');
   if (!token) return sendResponse(res, 401, false, 'No token, authorization denied');
   
-  // Ensure that the token starts with 'Bearer '
   if (!token.startsWith('Bearer ')) {
     return sendResponse(res, 401, false, 'Token format is invalid');
   }
@@ -39,4 +38,8 @@ router.get('/profile', authMiddleware, async (req, res) => {
   }
 });
 
-module.exports = { router, authMiddleware };
+// ✅ Correct export: Export only the router
+module.exports = router;
+
+// ✅ (Optional) If you need `authMiddleware` in other files
+module.exports.authMiddleware = authMiddleware;
