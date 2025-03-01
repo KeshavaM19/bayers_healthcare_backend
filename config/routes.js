@@ -14,12 +14,6 @@ router.delete('/soft/:id', authenticateUser, healthInfoController.softDelete);
 // Hard delete a record (permanent deletion)
 router.delete('/hard/:id', authenticateUser, healthInfoController.hardDelete);
 
-router.post('/health', healthInfoController.create); // ✅ Correct
-router.get('/health', healthInfoController.list);
-router.get('/health/:id', healthInfoController.show);
-router.put('/health/:id', healthInfoController.update);
-router.delete('/health/:id', healthInfoController.softDelete);
-router.delete('/health/:id/hard', healthInfoController.hardDelete);
 
 
 module.exports = router
