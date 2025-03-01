@@ -69,5 +69,5 @@ const authMiddleware = (req, res, next) => {
 router.post('/logout', authMiddleware, (req, res) => {
   sendResponse(res, 200, true, 'User logged out successfully');
 });
-
-module.exports = { router, authMiddleware };
+module.exports = router; 
+module.exports.authMiddleware = authMiddleware;
