@@ -7,7 +7,6 @@ const healthInfoController = {};
 healthInfoController.create = async (req, res) => {
     try {
         const body = req.body;
-        body.userId = req.user._id; // Associate record with logged-in user
         const healthData = await HealthInfo.create(body);
         res.status(201).json({ success: true, data: healthData });
     } catch (error) {
@@ -49,7 +48,6 @@ healthInfoController.show = async (req, res) => {
     try {
         const healthData = await HealthInfo.findOne({
             _id: req.params.id,
-            userId: req.user._id
         });
 
         if (!healthData) {
@@ -67,7 +65,7 @@ healthInfoController.show = async (req, res) => {
 healthInfoController.update = async (req, res) => {
     try {
         const healthData = await HealthInfo.findOneAndUpdate(
-            { _id: req.params.id, userId: req.user._id },
+            { _id: req.params.id },
             req.body,
             { new: true, runValidators: true }
         );
@@ -87,7 +85,7 @@ healthInfoController.update = async (req, res) => {
 healthInfoController.softDelete = async (req, res) => {
     try {
         const healthData = await HealthInfo.findOneAndUpdate(
-            { _id: req.params.id, userId: req.user._id },
+            { _id: req.params.id },
             { isDeleted: true },
             { new: true }
         );
@@ -107,8 +105,7 @@ healthInfoController.softDelete = async (req, res) => {
 healthInfoController.hardDelete = async (req, res) => {
     try {
         const healthData = await HealthInfo.findOneAndDelete({
-            _id: req.params.id,
-            userId: req.user._id
+            _id: req.params.id
         });
 
         if (!healthData) {
